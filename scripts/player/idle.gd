@@ -7,8 +7,12 @@ func process_input(event: InputEvent) -> State:
 
 
 func process_physics(delta: float) -> State:
-	if direction != 0:
+	player.velocity.x = move_toward(player.velocity.x, 0, 8)
+	player.velocity.y += gravity * delta
+	player.move_and_slide()
+	if direction.x != 0:
+		print("yes yeehaw")
 		return WalkState.new()
-	if player.velocity.y > 0:
+	if !player.is_on_floor():
 		return FallState.new()
 	return

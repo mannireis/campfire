@@ -1,7 +1,7 @@
 class_name State extends Node
 
 @export var animation_name: String
-@export var speed: float = 300
+@export var speed: float = 200
 
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var player: Player
@@ -11,13 +11,15 @@ var direction: Vector2:
 		Input.get_axis("up", "down"))
 
 func enter() -> void:
-	player.animator.play(animation_name)
+	#player.animator.play(animation_name)
+	pass
 
 func exit() -> void:
 	pass
 
 func process_input(event: InputEvent) -> State:
 	return null
+
 
 func process_frame(delta: float) -> State:
 	return null

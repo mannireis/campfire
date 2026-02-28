@@ -15,6 +15,12 @@
 [node name="player" type="CharacterBody2D" unique_id=524013605]
 script = ExtResource("1_dovo2")
 
+[node name="Camera2D" type="Camera2D" parent="." unique_id=594974895]
+process_priority = 1
+process_physics_priority = 1
+z_index = 1
+position_smoothing_enabled = true
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1830623018]
 unique_name_in_owner = true
 position = Vector2(-1.1368684e-13, 0)
@@ -29,14 +35,13 @@ texture = ExtResource("1_8afob")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1641800828]
 shape = SubResource("RectangleShape2D_dovo2")
 
-[node name="StateMachine" type="Node" parent="." unique_id=825248152]
+[node name="StateMachine" type="Node" parent="." unique_id=825248152 node_paths=PackedStringArray("starting_state")]
 unique_name_in_owner = true
 script = ExtResource("3_gmlin")
+starting_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine" unique_id=1840225328]
 script = ExtResource("4_lvxji")
-animation_name = null
-speed = null
 
 [node name="Walk" type="Node" parent="StateMachine" unique_id=1212241265]
 script = ExtResource("5_p47bc")

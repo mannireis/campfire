@@ -13,12 +13,13 @@ func init(player: Player) -> void:
 
 func change_state(new_state: State):
 	if current_state:
+		new_state.player = current_state.player
 		current_state.exit()
 		
 	current_state = new_state
 	current_state.enter()
 	
-	
+
 func process_physics(delta: float) -> void:
 	var new_state = current_state.process_physics(delta)
 	if new_state:
