@@ -2,11 +2,20 @@
 
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="1_8afob"]
 [ext_resource type="Script" uid="uid://b63ipdgiyhtbq" path="res://scripts/player.gd" id="1_dovo2"]
+[ext_resource type="Script" uid="uid://bsyyr06f5ibxg" path="res://scenes/player/state_machine.gd" id="3_gmlin"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dovo2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
 
 [node name="player" type="CharacterBody2D" unique_id=524013605]
 script = ExtResource("1_dovo2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1830623018]
+unique_name_in_owner = true
+position = Vector2(-1.1368684e-13, 0)
+scale = Vector2(0.99999994, 1)
+sprite_frames = SubResource("SpriteFrames_dovo2")
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=1974510487]
 position = Vector2(-1.9073486e-06, 0)
@@ -15,3 +24,15 @@ texture = ExtResource("1_8afob")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1641800828]
 shape = SubResource("RectangleShape2D_dovo2")
+
+[node name="StateMachine" type="Node" parent="." unique_id=825248152]
+unique_name_in_owner = true
+script = ExtResource("3_gmlin")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1840225328]
+
+[node name="Walk" type="Node" parent="StateMachine" unique_id=1212241265]
+
+[node name="Jump" type="Node" parent="StateMachine" unique_id=597999803]
+
+[node name="Fall" type="Node" parent="StateMachine" unique_id=496039242]
