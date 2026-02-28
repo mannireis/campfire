@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://806lbk8jtps4"]
 
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="1_8afob"]
-[ext_resource type="Script" uid="uid://b63ipdgiyhtbq" path="res://scripts/player.gd" id="1_dovo2"]
-[ext_resource type="Script" uid="uid://bsyyr06f5ibxg" path="res://scenes/player/state_machine.gd" id="3_gmlin"]
+[ext_resource type="Script" uid="uid://b63ipdgiyhtbq" path="res://scripts/player/player.gd" id="1_dovo2"]
+[ext_resource type="Script" uid="uid://bsyyr06f5ibxg" path="res://scripts/player/state_machine.gd" id="3_gmlin"]
+[ext_resource type="Script" uid="uid://bxyy7kqpcs736" path="res://scripts/player/idle.gd" id="4_lvxji"]
+[ext_resource type="Script" uid="uid://buhullwelcr1q" path="res://scripts/player/walk_state.gd" id="5_p47bc"]
+[ext_resource type="Script" uid="uid://bf2qnqk5tx3nj" path="res://scripts/player/jump_state.gd" id="6_75vfm"]
+[ext_resource type="Script" uid="uid://lp4k3852jdl3" path="res://scripts/player/fall_state.gd" id="7_0owmy"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dovo2"]
 
@@ -30,9 +34,15 @@ unique_name_in_owner = true
 script = ExtResource("3_gmlin")
 
 [node name="Idle" type="Node" parent="StateMachine" unique_id=1840225328]
+script = ExtResource("4_lvxji")
+animation_name = null
+speed = null
 
 [node name="Walk" type="Node" parent="StateMachine" unique_id=1212241265]
+script = ExtResource("5_p47bc")
 
 [node name="Jump" type="Node" parent="StateMachine" unique_id=597999803]
+script = ExtResource("6_75vfm")
 
 [node name="Fall" type="Node" parent="StateMachine" unique_id=496039242]
+script = ExtResource("7_0owmy")
