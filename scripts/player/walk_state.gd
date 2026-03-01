@@ -1,8 +1,18 @@
 class_name WalkState extends State
 
+func enter() -> void:
+	player.animator.play("walk")
+	player.hands.play("walk")
+
+
 func process_physics(delta: float) -> State:
+	
 	player.velocity.x = direction.x * speed
 	player.velocity.y += gravity * delta
+	if direction.x > 0:
+		player.animator.flip_h = false
+	if direction.x < 0:
+		player.animator.flip_h = true
 	player.move_and_slide()
 
 	if !player.is_on_floor():
