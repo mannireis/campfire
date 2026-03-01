@@ -1,6 +1,6 @@
 class_name JumpState extends State
 
-const jump_strength := -200
+const jump_strength := -210
 
 func enter() -> void:
 	player.velocity.y = jump_strength

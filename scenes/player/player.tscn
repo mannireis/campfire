@@ -10,7 +10,14 @@
 [ext_resource type="Script" uid="uid://buhullwelcr1q" path="res://scripts/player/walk_state.gd" id="5_p47bc"]
 [ext_resource type="Script" uid="uid://bf2qnqk5tx3nj" path="res://scripts/player/jump_state.gd" id="6_75vfm"]
 [ext_resource type="Script" uid="uid://lp4k3852jdl3" path="res://scripts/player/fall_state.gd" id="7_0owmy"]
+[ext_resource type="Script" uid="uid://dnni8hkjjr2g4" path="res://scenes/player/area_2d.gd" id="11_fm80t"]
 [ext_resource type="Texture2D" uid="uid://dpgngp1g2mvh2" path="res://assets/arms.png" id="11_je7p5"]
+[ext_resource type="Texture2D" uid="uid://ctkscdh7yeqeo" path="res://assets/health.png" id="13_gx1jg"]
+[ext_resource type="Texture2D" uid="uid://ciw5e4xc1xko8" path="res://assets/battery.png" id="13_ugbui"]
+[ext_resource type="Script" uid="uid://k1bjfsxhyf8v" path="res://scenes/player/player_audio_controller.gd" id="15_fcs02"]
+[ext_resource type="AudioStream" uid="uid://cjyctwdgpjcgl" path="res://assets/audio/data_pion-st1-footstep-sfx-323053.mp3" id="15_uf5tr"]
+[ext_resource type="AudioStream" uid="uid://btrbagbbdgyvm" path="res://assets/audio/data_pion-st2-footstep-sfx-323055.mp3" id="16_lgqa7"]
+[ext_resource type="AudioStream" uid="uid://dbh12u5dyyj6r" path="res://assets/audio/data_pion-st3-footstep-sfx-323056.mp3" id="17_8ydkj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
 size = Vector2(8, 22)
@@ -110,6 +117,9 @@ animations = [{
 "speed": 6.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_gx1jg"]
+radius = 4.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_3j4b4"]
 atlas = ExtResource("11_je7p5")
 region = Rect2(0, 24, 12, 12)
@@ -191,8 +201,60 @@ animations = [{
 "speed": 6.0
 }]
 
-[node name="player" type="CharacterBody2D" unique_id=524013605]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_je7p5"]
+size = Vector2(10, 16)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fcs02"]
+playback_mode = 1
+streams_count = 3
+stream_0/stream = ExtResource("15_uf5tr")
+stream_1/stream = ExtResource("16_lgqa7")
+stream_2/stream = ExtResource("17_8ydkj")
+
+[node name="player" type="CharacterBody2D" unique_id=524013605 groups=["player"]]
 script = ExtResource("1_dovo2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=387503509]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1917745556]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/Control" unique_id=1108274692]
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 21.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="TextureProgressBar2" type="TextureProgressBar" parent="CanvasLayer/Control/MarginContainer2" unique_id=1971579833]
+unique_name_in_owner = true
+layout_mode = 2
+step = 21.0
+value = 100.0
+texture_progress = ExtResource("13_ugbui")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control" unique_id=1609778177]
+layout_mode = 1
+offset_right = 48.0
+offset_bottom = 21.0
+theme_override_constants/margin_left = 21
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/Control/MarginContainer" unique_id=1341802400]
+unique_name_in_owner = true
+layout_mode = 2
+value = 3.0
+allow_lesser = true
+texture_progress = ExtResource("13_gx1jg")
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=1974510487]
 visible = false
@@ -229,13 +291,15 @@ script = ExtResource("6_75vfm")
 script = ExtResource("7_0owmy")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1730834088]
+color = Color(1, 0.8784314, 0.69803923, 1)
 energy = 1.94
 shadow_enabled = true
 shadow_color = Color(0.827451, 0.827451, 0.827451, 0)
 texture = ExtResource("4_h17s1")
-texture_scale = 0.8
+texture_scale = 0.5
 
 [node name="PointLight2D2" type="PointLight2D" parent="." unique_id=1471615890]
+color = Color(1, 0.8784314, 0.69803923, 1)
 energy = 1.5
 shadow_enabled = true
 shadow_color = Color(0.827451, 0.827451, 0.827451, 0)
@@ -243,10 +307,37 @@ shadow_filter = 1
 shadow_item_cull_mask = 3
 texture = ExtResource("3_5gtgg")
 
+[node name="Area2D" type="Area2D" parent="PointLight2D2" unique_id=225021950]
+position = Vector2(37, 0)
+monitoring = false
+monitorable = false
+script = ExtResource("11_fm80t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PointLight2D2/Area2D" unique_id=114388069]
+shape = SubResource("CircleShape2D_gx1jg")
+
 [node name="hands" type="AnimatedSprite2D" parent="PointLight2D2" unique_id=1140768343]
 unique_name_in_owner = true
 position = Vector2(0, 6)
 sprite_frames = SubResource("SpriteFrames_iqsei")
 animation = &"walk"
 autoplay = "idle"
-frame_progress = 0.15663318
+frame_progress = 0.5996061
+
+[node name="Area2D" type="Area2D" parent="." unique_id=882213301]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=59125874]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_je7p5")
+
+[node name="BatteryTimer" type="Timer" parent="." unique_id=1761759037]
+wait_time = 360.0
+one_shot = true
+
+[node name="Steps" type="AudioStreamPlayer2D" parent="." unique_id=1326408593]
+stream = SubResource("AudioStreamRandomizer_fcs02")
+bus = &"Footsteps"
+script = ExtResource("15_fcs02")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="BatteryTimer" to="." method="_on_battery_timer_timeout"]

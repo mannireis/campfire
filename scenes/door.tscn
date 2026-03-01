@@ -2,6 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://dko4mbiiwh1jl" path="res://assets/door.png" id="1_hpvv5"]
 [ext_resource type="Script" uid="uid://qvj2icjwrbcg" path="res://scenes/door.gd" id="1_uvdjg"]
+[ext_resource type="AudioStream" uid="uid://d1j72flu2apha" path="res://assets/audio/door open.wav" id="3_la1wf"]
+[ext_resource type="AudioStream" uid="uid://cbfr0y0uises7" path="res://assets/audio/door close.wav" id="4_18pbm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uvdjg"]
 atlas = ExtResource("1_hpvv5")
@@ -57,6 +59,14 @@ position = Vector2(0, -8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=438536179]
 shape = SubResource("RectangleShape2D_5f452")
+
+[node name="DoorOpen" type="AudioStreamPlayer2D" parent="." unique_id=593415784]
+stream = ExtResource("3_la1wf")
+bus = &"Door"
+
+[node name="DoorClose" type="AudioStreamPlayer2D" parent="." unique_id=100589755]
+stream = ExtResource("4_18pbm")
+bus = &"Door"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

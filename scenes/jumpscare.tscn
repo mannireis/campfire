@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://hcbx1lcs7o0c"]
+
+[ext_resource type="Texture2D" uid="uid://c6qx5jt1wilcd" path="res://assets/jumpscare.jpg" id="1_0krjb"]
+[ext_resource type="Script" uid="uid://jadkaavu50bf" path="res://scenes/jumpscare.gd" id="1_yfyrm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p1iyj"]
+size = Vector2(320, 180)
+
+[node name="Node2D" type="Node2D" unique_id=868230905]
+script = ExtResource("1_yfyrm")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=79461784]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=706829393]
+shape = SubResource("RectangleShape2D_p1iyj")
+
+[node name="Jumpscare" type="Sprite2D" parent="." unique_id=641755148]
+unique_name_in_owner = true
+visible = false
+position = Vector2(-1.66893e-06, 0)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_0krjb")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
