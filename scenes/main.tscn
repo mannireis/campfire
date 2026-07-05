@@ -208,7 +208,7 @@ color = Color(0.056291588, 0.056291603, 0.056291573, 1)
 
 [node name="player" parent="." unique_id=524013605 instance=ExtResource("1_o5qli")]
 unique_name_in_owner = true
-position = Vector2(1220, -61)
+position = Vector2(-387, 7)
 
 [node name="TileMap" type="Node2D" parent="." unique_id=1079124471]
 
